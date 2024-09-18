@@ -1,8 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 import { BsArrowRight } from "react-icons/bs";
 import { RiSendPlaneFill } from "react-icons/ri";
 
 const Contact = () => {
+  const[subject, setSubject] = useState("");
+  const[email, setEmail] = useState("");
+  const[message, setMessage] = useState("");
+
+  const handleSubmit = (e) => {
+    window.location.href = `mailto:${email}?subject=${subject}&body=${message}`;
+  }
+  
   return (
     <div id="contact" className="container m-auto mt-16">
       {/* heading */}
@@ -45,19 +53,20 @@ const Contact = () => {
             data-aos="zoom-in"
             
             className="flex justify-center items-center flex-col gap-5 w-[70%] md:w-[100%] sm:w-[95%] mx-auto"
-            action="mailto:tanmaymeshram883@gmail.com"
           >
             <input
               className="px-3 shadow-[0_0_16px_0px_rgba(0,0,0,0.1)] p-2 rounded-lg w-full"
               type="email"
               placeholder="e.g. example@email.com"
               name=""
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               className="px-3 shadow-[0_0_16px_0px_rgba(0,0,0,0.1)] p-2 rounded-lg w-full"
               type="text"
-              placeholder="e.g. John Doe"
+              placeholder="Enter subject"
               name=""
+              onChange={(e) => setSubject(e.target.value)}
             />
             <textarea
               className="px-3 shadow-[0_0_16px_0px_rgba(0,0,0,0.1)] p-2 rounded-lg w-full"
@@ -66,12 +75,14 @@ const Contact = () => {
               placeholder="Write your message"
               name=""
               id=""
+              onChange={(e) => setMessage(e.target.value)}
             />
             <button
               className="bg-yellow-500 w-full text-white font-semibold  p-2 rounded-lg flex items-center justify-center space-x-1"
               type="submit"
+              onClick={handleSubmit}
             >
-              <span>Send</span>
+              <span >Send</span>
               <RiSendPlaneFill/>
             </button>
           </form>

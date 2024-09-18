@@ -14,6 +14,10 @@ import resumePDF from "../../assets/Resume.pdf";
 
 
 const Hero = () => {
+  const handleHireMeClick = () => {
+    window.location.href = "mailto:tanmaymeshram883@gmail.com?subject=Raised from Portfolio&body=Hi Tanmay, I am interested in hiring you for a project. Please let me know your availability.";
+  }
+
   return (
     <div id="home" className={` bg-gradient-to-r from-green-200 to-blue-200 `}>
       <div className=" container mx-auto pt-5 h-[750px] md:h-[100vh] md:flex-col-reverse sm:h-[780px]  flex sm:flex-col-reverse sm:pt-0 ">
@@ -28,6 +32,8 @@ const Hero = () => {
             <TypeAnimation
               data-aos="fade-up"
               sequence={[
+                "Software Developer",
+                2000,
                 "Full Stack Developer",
                 2000,
                 "Web Developer",
@@ -54,7 +60,7 @@ const Hero = () => {
               href=""
               className=" bg-black text-[1rem] text-white px-10 py-2 sm:px-8 rounded-lg font-bold  hover:text-yellow-500"
             >
-              <span> Hire Me</span>
+              <span onClick={handleHireMeClick} > Hire Me</span>
             </a>
             <a
               href={resumePDF}
@@ -110,7 +116,8 @@ const Hero = () => {
             <img
             data-aos="fade-up"
               className=" h-[90%]  w-full object-cover  md:h-[95%] md:m-auto sm:m-0"
-              src='https://i.postimg.cc/XNhbv4TB/2.png'
+              // src='https://i.postimg.cc/XNhbv4TB/2.png'
+              src="https://i.postimg.cc/SK5q11yM/my.jpg"
               // src={mine}
               alt="mine"
             />
