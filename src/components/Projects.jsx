@@ -37,8 +37,8 @@ const Projects = () => {
         </p>
       </Reveal>
 
-      <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_1.5fr] lg:gap-14">
-        <Reveal>
+      <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-14">
+        <Reveal className="min-w-0">
           <ul className="border-t border-line" role="tablist" aria-label="Projects">
             {projects.map((x, n) => (
               <li key={x.id} className="border-b border-line">
@@ -46,7 +46,7 @@ const Projects = () => {
                   role="tab"
                   aria-selected={n === i}
                   onClick={() => setI(n)}
-                  className={`group flex w-full items-baseline gap-5 py-4 text-left font-serif text-3xl transition md:text-4xl ${
+                  className={`group flex w-full items-baseline gap-4 py-4 text-left font-serif text-2xl transition sm:gap-5 sm:text-3xl md:text-4xl ${
                     n === i ? "text-white" : "text-zinc-600 hover:text-zinc-300"
                   }`}
                 >
@@ -59,9 +59,9 @@ const Projects = () => {
           </ul>
         </Reveal>
 
-        <Reveal delay={100}>
+        <Reveal delay={100} className="min-w-0">
           <article
-            className="card2 flex h-full flex-col !p-6 md:!p-8"
+            className="card2 flex h-full flex-col !p-5 sm:!p-6 md:!p-8"
             onPointerDown={(e) => (touch.current = e.clientX)}
             onPointerUp={(e) => {
               if (touch.current == null) return;
@@ -71,7 +71,7 @@ const Projects = () => {
             }}
           >
             <div key={p.id} className="swap flex flex-1 flex-col">
-              <div className="flex items-center justify-between font-mono text-xs text-dim">
+              <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 font-mono text-xs text-dim">
                 <span>
                   PROJECT {pad(i + 1)} / {pad(total)}
                 </span>

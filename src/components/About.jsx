@@ -41,12 +41,12 @@ const About = () => {
   const time = useClock("Asia/Kolkata");
   return (
     <section id="about" className="section">
-      <div className="grid gap-12 lg:grid-cols-[.9fr_1.4fr] lg:gap-20">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,.9fr)_minmax(0,1.4fr)] lg:gap-20">
         {/* profile card */}
-        <Reveal className="lg:sticky lg:top-24 lg:self-start">
-          <div className="card2 !p-7">
-            <div className="flex items-start justify-between gap-3">
-              <h3 className="font-serif text-4xl leading-none text-white">
+        <Reveal className="min-w-0 lg:sticky lg:top-24 lg:self-start">
+          <div className="card2 !p-5 sm:!p-7">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <h3 className="font-serif text-3xl leading-none text-white sm:text-4xl">
                 Tanmay <span className="text-zinc-500">Meshram</span>
               </h3>
               <span className="flex shrink-0 items-center gap-2 rounded-full border border-line px-3 py-1 text-xs text-zinc-200">
@@ -57,7 +57,7 @@ const About = () => {
               <FiMapPin /> India <span>·</span> {time}
             </p>
             <Face className="mx-auto my-6 h-64 w-full" />
-            <div className="flex items-center justify-between gap-4 border-t border-line pt-5">
+            <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-t border-line pt-5">
               <div className="flex gap-2">
                 <a href={profile.socials.github} target="_blank" rel="noreferrer" aria-label="GitHub" className="icon-btn"><FiGithub /></a>
                 <a href={profile.socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="icon-btn"><FiLinkedin /></a>

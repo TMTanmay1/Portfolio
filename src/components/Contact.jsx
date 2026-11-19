@@ -9,8 +9,8 @@ import PixelAvatar from "./PixelAvatar";
 
 const Contact = () => (
   <footer id="contact" className="section !pb-10">
-    <div className="grid items-center gap-14 lg:grid-cols-[1.25fr_1fr] lg:gap-16">
-      <Reveal>
+    <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-16">
+      <Reveal className="min-w-0">
         <Eyebrow n="06" label="contact" />
         <h2 className="mt-6 font-serif text-5xl leading-[1] text-white md:text-7xl">
           Let's create something <em className="text-zinc-500">impactful.</em>

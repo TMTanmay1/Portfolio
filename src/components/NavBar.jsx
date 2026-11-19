@@ -35,7 +35,7 @@ const NavBar = () => {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50">
-        <div className="flex items-center justify-between px-6 py-5 md:px-10">
+        <div className="flex items-center justify-between bg-gradient-to-b from-ink/90 via-ink/50 to-transparent px-6 pb-7 pt-5 md:px-10">
           <a href="#top" aria-label="Home" onClick={() => setOpen(false)} className="font-script text-5xl leading-none text-white">
             TM
           </a>

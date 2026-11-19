@@ -8,7 +8,7 @@ export const profile = {
   socials: {
     github: "https://github.com/TMTanmay1/",
     linkedin: "https://www.linkedin.com/in/tanmay-meshram-614727233/",
-    instagram: "https://www.instagram.com/tmtanmay3466/",
+    instagram: "https://www.instagram.com/tmtanmay01/",
     whatsapp: "https://wa.me/917972711814?text=Hi%20Tanmay!",
   },
 };

@@ -9,37 +9,24 @@ const sparkles = [
   { x: "20%", y: "34%", d: "3.5s", s: 4 },
 ];
 
-// card width available per breakpoint
-const available = () => (window.innerWidth >= 1024 ? 430 : window.innerWidth >= 640 ? 344 : 258);
-
 /**
- * Pixel-art portrait on a themed backdrop. Works with any image:
- *  - small sprites (≤256px wide) are scaled by whole numbers with crisp pixels
- *  - larger AI-generated art is simply scaled to fit, with smooth resampling
+ * Pixel-art portrait on a themed backdrop. Fully fluid: it fills its column up
+ * to 430px, keeps the image's aspect ratio, and never forces the layout wider.
+ * Small sprites (≤256px wide) render with crisp pixels; larger art scales smoothly.
  * The figure shifts in steps toward the cursor so the parallax feels pixelated.
  */
 const PixelAvatar = ({ src, alt = "", className = "", label = "tanmay.png", note, parallax = true, bleed = false }) => {
   const frame = useRef(null);
   const fig = useRef(null);
-  const [dim, setDim] = useState({ w: 86, h: 85 });
-  const [boxW, setBoxW] = useState(258);
+  const [dim, setDim] = useState({ w: 720, h: 742 }); // sensible default → no layout jump when the image loads
   const sprite = dim.w <= 256;
-
-  // card width: whole multiples of the sprite's pixels, or just the available width
-  useEffect(() => {
-    const calc = () => {
-      const a = available();
-      setBoxW(sprite ? dim.w * Math.max(1, Math.floor(a / dim.w)) : a);
-    };
-    calc();
-    window.addEventListener("resize", calc);
-    return () => window.removeEventListener("resize", calc);
-  }, [dim, sprite]);
 
   useEffect(() => {
     const el = frame.current;
     const f = fig.current;
     if (!parallax || !el || !f || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+    // no cursor on touch screens — skip the listener entirely
+    if (window.matchMedia?.("(hover: none)").matches) return;
     const onMove = (e) => {
       const r = el.getBoundingClientRect();
       const unit = r.width / (sprite ? dim.w : 64); // one "pixel" step on screen
@@ -55,7 +42,7 @@ const PixelAvatar = ({ src, alt = "", className = "", label = "tanmay.png", note
   }, [dim, sprite, parallax, bleed]);
 
   return (
-    <figure className={`mx-auto max-w-full lg:ml-auto lg:mr-0 ${className}`} style={{ width: boxW }}>
+    <figure className={`mx-auto w-full min-w-0 max-w-[430px] lg:ml-auto lg:mr-0 ${className}`}>
       <div
         ref={frame}
         className="relative w-full overflow-hidden border-2 border-blue/70 bg-[#0b1230] shadow-[0_0_0_4px_#050507,0_0_0_5px_rgba(77,141,255,.35),0_30px_80px_-30px_rgba(77,141,255,.55)]"
@@ -104,7 +91,7 @@ const PixelAvatar = ({ src, alt = "", className = "", label = "tanmay.png", note
           <span key={p} aria-hidden className={`absolute h-2 w-2 bg-[#050507] ${p}`} />
         ))}
       </div>
-      <figcaption className="mt-4 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-dim">
+      <figcaption className="mt-4 flex items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-widest text-dim">
         <span>{label}</span>
         <span>{note ?? (sprite ? `${dim.w}×${dim.h} px` : "pixel art")}</span>
       </figcaption>

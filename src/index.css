@@ -4,6 +4,7 @@
 
 @layer base {
   html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
+  html, body { overflow-x: clip; } /* safety net: never allow sideways scrolling */
   body {
     @apply font-sans text-zinc-300 antialiased;
     background-color: #050507;

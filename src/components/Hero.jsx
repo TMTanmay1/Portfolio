@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FiArrowDown } from "react-icons/fi";
 import Lanyard from "./Lanyard";
+import { useMedia } from "../hooks/hooks";
 
 const script = [
   { t: "PS C:\\Users\\tanmay> npm run portfolio", typed: true },
@@ -73,9 +74,11 @@ const ScrollButton = () => (
   </a>
 );
 
-const Hero = ({ ready = true }) => (
+const Hero = ({ ready = true }) => {
+  const wide = useMedia("(min-width: 768px)");
+  return (
   <section id="top" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
-    <Lanyard className="absolute left-0 top-0 hidden h-full w-[42%] md:block" />
+    {wide && <Lanyard className="absolute left-0 top-0 h-full w-[42%]" />}
 
     <div className={`relative z-10 transition-all duration-[1400ms] ease-out ${ready ? "translate-y-0 opacity-100 blur-0" : "translate-y-4 opacity-0 blur-md"}`}>
       <h1 className="font-script text-[clamp(4.5rem,11vw,9rem)] leading-[.9] text-white">Tanmay Meshram</h1>
@@ -92,5 +95,6 @@ const Hero = ({ ready = true }) => (
     </div>
   </section>
 );
+};
 
 export default Hero;
