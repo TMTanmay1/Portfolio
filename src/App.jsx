@@ -1,34 +1,53 @@
-import React, { useState, useEffect } from "react";
-import { Suspense } from "react";
-import { BarLoader } from "react-spinners";
-import Home from "./pages/Home";
+import React, { useCallback, useEffect, useState } from "react";
+import ParticleScene from "./components/ParticleScene";
+import Loader from "./components/Loader";
+import NavBar from "./components/NavBar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Projects from "./components/Projects";
+import { Experience, Education } from "./components/Timeline";
+import Skills from "./components/Skills";
+import Contact from "./components/Contact";
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [burst, setBurst] = useState(false);
+  const [ready, setReady] = useState(false);
 
+  const onProgress = useCallback((p) => setProgress(p), []);
+  const onBurst = useCallback(() => setBurst(true), []);
+
+  // start the hero animations once the explosion has settled
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (!burst) return;
+    const t = setTimeout(() => setReady(true), 900);
+    return () => clearTimeout(t);
+  }, [burst]);
 
   return (
-    <Suspense
-      fallback={
-        <div className="h-screen w-full flex items-center justify-center">
-          <BarLoader color="#f6c400" height={4} />
-        </div>
-      }
-    >
-      {loading ? (
-        <div className="h-screen w-full flex items-center justify-center">
-          <BarLoader color="#f6c400" height={4} />
-        </div>
-      ) : (
-        <Home />
-      )}
-    </Suspense>
+    <>
+      <ParticleScene progress={progress} burst={burst} />
+      <Loader onProgress={onProgress} onBurst={onBurst} />
+      <div
+        className="relative z-10"
+        style={{
+          opacity: burst ? 1 : 0,
+          pointerEvents: burst ? "auto" : "none",
+          transition: "opacity 1.2s ease .5s",
+        }}
+      >
+        <NavBar />
+        <main>
+          <Hero ready={ready} />
+          <About />
+          <Projects />
+          <Experience />
+          <Education />
+          <Skills />
+        </main>
+        <Contact />
+      </div>
+    </>
   );
 };
 
